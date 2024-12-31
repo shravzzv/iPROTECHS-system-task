@@ -4,11 +4,7 @@ const User = require('../models/user')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-exports.signupGet = (req, res) => {
-  res.send('signup not implemented')
-}
-
-exports.signupPost = [
+exports.signup = [
   body('email')
     .trim()
     .notEmpty()
@@ -62,23 +58,12 @@ exports.signupPost = [
 
       res.json({ token, userId: newUser.id })
     } else {
-      res.render('landing/signupForm', {
-        title: 'Sign Up Error',
-        errors: errors.array(),
-        email,
-        password,
-        passwordConfirm,
-        role,
-      })
+      res.status(401).json(errors.array())
     }
   }),
 ]
 
-exports.loginGet = (req, res) => {
-  res.send('login not implemented')
-}
-
-exports.loginPost = [
+exports.login = [
   body('email')
     .trim()
     .notEmpty()
@@ -115,14 +100,7 @@ exports.loginPost = [
 
       res.json({ token, userId: req.user.id })
     } else {
-      const { email, password } = matchedData(req, { onlyValidData: false })
-
-      res.render('landing/signinForm', {
-        title: 'Sign In Error',
-        errors: errors.array(),
-        email,
-        password,
-      })
+      res.status(401).json(errors.array())
     }
   }),
 ]
