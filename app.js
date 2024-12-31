@@ -8,6 +8,7 @@ require('dotenv').config()
 require('./config/db.config')
 const indexRouter = require('./routes/index')
 const authRouter = require('./routes/auth')
+const adminRouter = require('./routes/admin')
 
 const app = express()
 
@@ -20,5 +21,6 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', indexRouter)
 app.use('/auth', authRouter)
+app.use('/admin', adminRouter)
 
 module.exports = app
