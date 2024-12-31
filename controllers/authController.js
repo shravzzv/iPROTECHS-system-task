@@ -33,11 +33,18 @@ exports.signup = [
     })
     .withMessage(`Doesn't match the password.`),
 
-  body('role').trim().notEmpty().withMessage('Role must not be empty.'),
+  body('role')
+    .trim()
+    .notEmpty()
+    .withMessage('Role must not be empty.')
+    .isIn(['admin', 'manager', 'technician', 'user'])
+    .withMessage(
+      'Role should be one of these: admin, manager, technician, and user.'
+    ),
 
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req)
-    const { email, password, passwordConfirm, role } = matchedData(req, {
+    const { email, password, role } = matchedData(req, {
       onlyValidData: false,
     })
 
