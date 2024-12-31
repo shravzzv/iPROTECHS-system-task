@@ -10,6 +10,7 @@ const indexRouter = require('./routes/index')
 const authRouter = require('./routes/auth')
 const adminRouter = require('./routes/admin')
 const managerRouter = require('./routes/manager')
+const technicianRouter = require('./routes/technician')
 
 const app = express()
 
@@ -24,5 +25,6 @@ app.use('/', indexRouter)
 app.use('/auth', authRouter)
 app.use('/admin', adminRouter)
 app.use('/manager', managerRouter)
+app.use('/technician', technicianRouter)
 
 module.exports = app
